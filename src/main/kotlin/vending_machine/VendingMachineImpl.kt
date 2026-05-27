@@ -55,11 +55,22 @@ class VendingMachineImpl(
 
                 // Ask for product
                 println("You selected: ${input.product.name} which costs ${input.product.price}")
-                val selectedProduct = products.find { it.name == input.product.name }
+                var selectedProduct = products.find { it.name == input.product.name }
 
                 // Validado existencia producto
                 if (selectedProduct == null) {
                     println("Product not found")
+                    while (selectedProduct == null){
+                        println("Unfprtanetely the product isnt found. PLease select another one:")
+                        println("Productos disponibles:")
+
+                        products.forEach {
+                            println("${it.name} - ${it.price}")
+                        }
+                        var new_selected_product: String? = null
+                        new_selected_product=readln()
+                        selectedProduct = products.find { it.name == new_selected_product }
+                    }
                     return // Loop back to asking for product
                 }
 
